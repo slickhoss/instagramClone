@@ -1,4 +1,5 @@
 <?php
+use App\Mail\NewUserMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,3 +36,7 @@ Route::patch('/profile/{user}', 'ProfilesController@update')->name('profile.upda
 Route::post('follow/{user}', 'FollowsController@store');
 
 Route::get('/', 'PostsController@index');
+
+Route::get('/email', function(){
+    return new NewUserMail();
+});
