@@ -40,3 +40,5 @@ Route::get('/', 'PostsController@index');
 Route::get('/email', function(){
     return new NewUserMail();
 });
+
+Route::get('/p/delete/{post}', 'PostsController@delete');

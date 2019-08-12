@@ -14,9 +14,15 @@
                     </div>
                     <div>
                         <div class="font-weight-bold">
+
+                            <?php 
+                            if($post->user->id == auth()->user()->id)
+                            {
+                             echo "<button class='btn btn-outline-danger'><a href='/p/delete/$post->id'>delete</a></button>";
+                            }
+                            ?>
                             <a href="/profile/{{$post->user->id}}"><span class="text-dark">{{$post->user->userName}}</span></a>
-                            <a href="#" class="pl-3">Follow</a>
-                        </div>
+                            </div>
                     </div>
                 </div>     
 

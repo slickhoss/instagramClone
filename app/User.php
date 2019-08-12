@@ -51,7 +51,8 @@ class User extends Authenticatable
             function ($user)
             {
                 $user->profile()->create(
-                    ['title' => $user->userName,]);
+                    ['title' => $user->userName]);
+                    $user->following()->toggle($user->profile);
                 Mail::to($user->email)->send(new NewUserMail());
 
             });

@@ -10,7 +10,9 @@
             <div class='d-flex justify-content-between align-items-baseline'>
                 <div class="d-flex align-items-center pb-3">
                     <div class="h4">{{ $user->userName}}</div>
+                    @cannot('update', $user->profile)
                     <follow-button user-id="{{$user->id}}" follows="{{ $follows }}"></follow-button>
+                    @endcan
                 </div>
                 @can('update', $user->profile)
                     <a href="/p/create">Add new Post</a>
@@ -31,22 +33,18 @@
                 <div><a href='http://hoongandre.ca'> {{ $user->profile->url }} </a></div>
             </div>
     </div>
+        @if($user->posts->count() <= 0)
+        <hr>
+         <div class='text-primary d-flex justify-content-center'> <h3>Submit your first post!</h3> </div>
+        @endif
+
     <div class='row pt-5'>
-        @foreach($user->posts as $post)
+
+    @foreach($user->posts as $post)
         <div class='col-4 pb-4'>
-            <a href="/p/ {{$post->id}}"> <img src="/storage/{{ $post->image }}" class="w-100"> </a>
+            <a href="/p/{{$post->id}}"> <img src="/storage/{{ $post->image }}" class="w-100"> </a>
         </div>
         @endforeach
-
-        <div class='col-4'>
-            <img src="https://instagram.fyvr3-1.fna.fbcdn.net/vp/52b5643661bdad35e783fdea348ef9c4/5DCEB1CE/t51.2885-15/e35/c0.109.925.925a/s150x150/66056371_2243301639072331_4740487891029112385_n.jpg?_nc_ht=instagram.fyvr3-1.fna.fbcdn.net" class="w-100">
-        </div>
-        <div class='col-4'>
-            <img src="https://instagram.fyvr3-1.fna.fbcdn.net/vp/52b5643661bdad35e783fdea348ef9c4/5DCEB1CE/t51.2885-15/e35/c0.109.925.925a/s150x150/66056371_2243301639072331_4740487891029112385_n.jpg?_nc_ht=instagram.fyvr3-1.fna.fbcdn.net" class="w-100">
-        </div>
-        <div class='col-4'>
-            <img src="https://instagram.fyvr3-1.fna.fbcdn.net/vp/52b5643661bdad35e783fdea348ef9c4/5DCEB1CE/t51.2885-15/e35/c0.109.925.925a/s150x150/66056371_2243301639072331_4740487891029112385_n.jpg?_nc_ht=instagram.fyvr3-1.fna.fbcdn.net" class="w-100">
-        </div>
     </div>
 </div>
 @endsection

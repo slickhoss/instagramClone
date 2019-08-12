@@ -1,7 +1,12 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container">
+    @if($posts->count() <= 0)
+    <div class='text-primary d-flex justify-content-center'> <h3>Start by folowing others!</h3> </div>
+    
+    <div class="container">
+ 
+    @endif
     @foreach ($posts as $post)
     <div class="row">
         <div class="col-6 offset-3">

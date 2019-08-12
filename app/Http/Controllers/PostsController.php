@@ -48,6 +48,12 @@ class PostsController extends Controller
 
     public function show(\App\Post $post)
     {
-        return view('posts/show', ['post' => $post]);
+        return view('posts/show', ['post' => $post, 'user' => $post->user()]);
+    }
+
+    public function delete( \App\Post $post)
+    {
+        $post->delete();
+        return redirect('/profile/' . auth()->user()->id);
     }
 }

@@ -23,14 +23,14 @@ class ProfilesController extends Controller
             'count.followers'. $user->id, 
             now()->addSecond(30),
             function() use($user) {
-                return $user->profile->followers->count();
+                return $user->profile->followers->count() - 1;
             });
         
         $followingCount = Cache::remember(
             'count.following'. $user->id, 
             now()->addSecond(30),
             function() use($user) {
-                return $user->following->count();
+                return $user->following->count() - 1;
             });
 
         //$user = User::findOrFail($userId);//returns user object by found by id
