@@ -10,7 +10,6 @@ class ProfilesController extends Controller
 {
     public function index(User $user)
     {
-
         $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
         $postsCount = Cache::remember(
             'count.posts'. $user->id, 
@@ -37,7 +36,7 @@ class ProfilesController extends Controller
 
         return view('profiles/index', compact('user', 'follows', 'postsCount', 'followersCount', 'followingCount'));
     }
-
+    
     public function edit(\App\User $user)
     {
         $this->authorize('update', $user->profile);

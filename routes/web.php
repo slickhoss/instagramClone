@@ -17,7 +17,6 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
 //route for profile view
 Route::get('/profile/{user}', 'ProfilesController@index')->name('profile.show');
 
@@ -41,4 +40,11 @@ Route::get('/email', function(){
     return new NewUserMail();
 });
 
+
+//test route
+Route::get('/p/comment/{post}', 'CommentsController@createComment');
+Route::post('/p/comment/{post}/store', 'CommentsController@store');
+
+
 Route::get('/p/delete/{post}', 'PostsController@delete');
+
