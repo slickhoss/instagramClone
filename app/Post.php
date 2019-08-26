@@ -12,7 +12,7 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function likes()
+    public function likedBy()
     {
         return $this->belongsToMany(User::class);
     }

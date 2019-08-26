@@ -24,21 +24,20 @@
                         </div>
                     </div>
                 </div>     
-                
-                <div class="pt-2">
-                <a class="pr-4" href="/like/p/{post}"><img src="/svg/heart.png" class="pb-1" style="max-width: 28px"/></a><a href="/p/comment/{{$post->id}}"><img src="/svg/comment.png" class="pb-1" style="max-width: 28px"/></a>  
-                </div>
                 <p>                
                     <span class="font-weight-bold"><a href="/profile/{{$post->user->id}}"><span class="text-dark">{{$post->user->userName}}</a></span></span>
                     {{$post->caption}}
                 </p> 
                 <hr>
                 <p>                
-                @foreach($post->comments as $comment)
-                    <span class="font-weight-bold"><a href="/profile/{{$comment->user->id}}"><span class="text-dark">{{$comment->user->name}}</a></span></span>
-                    {{$comment->comment}}
-                    <br>
-                @endforeach
+                Liked by: 
+                <?php
+                    $array = [];
+                    foreach($post->likedBy as $user){
+                        array_push($array, '<a href="/profile/'.$user->id.'">'.$user->name.'</a> ');
+                    }
+                    echo implode(', ', $array);
+                ?>
                 </p>
             </div>
         </div>

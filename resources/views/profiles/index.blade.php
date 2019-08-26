@@ -10,7 +10,6 @@
             <div class='d-flex justify-content-between align-items-baseline'>
                 <div class="d-flex align-items-center pb-3">
                     <div class="h4">{{ $user->userName}}</div>
-                    {{$user->id}}
                     @cannot('update', $user->profile)
                     <follow-button user-id="{{$user->id}}" follows="{{ $follows }}"></follow-button>
                     @endcan
@@ -36,7 +35,7 @@
     </div>
         @if($user->posts->count() <= 0)
         <hr>
-         <div class='text-primary d-flex justify-content-center'> <h3>Submit your first post!</h3> </div>
+         <div class='text-primary d-flex justify-content-center'> <h3 style="color: --blue;">Submit your first post!</h3> </div>
         @endif
 
     <div class='row pt-5'>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Comment;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
@@ -49,6 +50,12 @@ class PostsController extends Controller
     public function show(\App\Post $post)
     {
         return view('posts/show', ['post' => $post, 'user' => $post->user()]);
+    }
+
+    public function likedBy (\App\Post $post)
+    {
+        $user = $post->user();
+        return view('posts/likedBy', compact('post', 'user'));
     }
 
     public function delete( \App\Post $post)

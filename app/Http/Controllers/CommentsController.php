@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class CommentsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function store(\App\Post $post)
     {
         $data = request()->validate([
@@ -17,7 +22,7 @@ class CommentsController extends Controller
             'post_id' =>  $post->id
            ]);        
         $user= auth()->user();
-        return redirect('/profile/' . auth()->user()->id);
+        return redirect('/p/' . $post->id);
     }
 
     public function createComment(\App\Post $post)
