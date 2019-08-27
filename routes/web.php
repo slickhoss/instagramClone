@@ -45,7 +45,7 @@ Route::get('/email', function(){
 Route::get('/p/comment/{post}', 'CommentsController@createComment');
 Route::post('/p/comment/{post}/store', 'CommentsController@store');
 
-Route::post('/like/p/{post}', 'LikesController@store');
+Route::get('/like/p/{post}', 'LikesController@store');
 
 Route::get('likedby/{post}', 'PostsController@likedBy');
 
