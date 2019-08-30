@@ -13,15 +13,13 @@
 
     <div class="row pt-2 pb-4">
         <div class="col-6 offset-3">
-            @foreach(auth()->user()->likes as $liked)
-                @if($liked->id === $post->id)
-                <a class="pr-4" href="/like/p/{{$post->id}}"><img src="/svg/hearted.png" class="pb-1" style="max-width: 28px"/>
-                @elseif ($liked->id != $post->id)
-                    <a class="pr-4" href="/like/p/{{$post->id}}"><img src="/svg/heart.png" class="pb-1" style="max-width: 28px"/>
+            <a class="pr-4" href="/like/p/{{$post->id}}">
+                @if(in_array($post->id, $heart_ids))
+                    <img src="/svg/hearted.png" class="pb-1" style="max-width: 28px"/>
+                @else
+                    <img src="/svg/heart.png" class="pb-1" style="max-width: 28px"/>
                 @endif
-            @endforeach
-            <a class="pr-4" href="/like/p/{{$post->id}}"><img src="/svg/heart.png" class="pb-1" style="max-width: 28px"/>
-
+            </a>
             <a href="/p/comment/{{$post->id}}"><img src="/svg/comment.png" class="pb-1" style="max-width: 28px"/></a>  
                 <span class="float-right pr-1"> 
                 <?php 

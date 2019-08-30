@@ -25,7 +25,7 @@
 
                 <div class="d-flex">
                     <div class='pr-3'><strong>{{ $postsCount }}</strong> posts</div>
-                    <div class='pr-3'><strong>{{ $followersCount }}</strong> followers</div>
+                    <div class='pr-3'><strong>{{ $followersCount }}</strong> <a href="/profile/{{$user->id}}/followers"> followers </a></div>
                     <div class='pr-3'><strong>{{ $followingCount}}</strong> following</div>
                 </div>
                 <div> {{ $user->profile->title }} </div>

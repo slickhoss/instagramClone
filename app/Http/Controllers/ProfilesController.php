@@ -13,21 +13,21 @@ class ProfilesController extends Controller
         $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
         $postsCount = Cache::remember(
             'count.posts'. $user->id, 
-            now()->addSecond(30),
+            now()->addSecond(15),
             function() use($user) {
                 return $user->posts->count();
             });
 
         $followersCount = Cache::remember(
             'count.followers'. $user->id, 
-            now()->addSecond(30),
+            now()->addSecond(15),
             function() use($user) {
                 return $user->profile->followers->count() - 1;
             });
         
         $followingCount = Cache::remember(
             'count.following'. $user->id, 
-            now()->addSecond(30),
+            now()->addSecond(15),
             function() use($user) {
                 return $user->following->count() - 1;
             });
@@ -37,6 +37,11 @@ class ProfilesController extends Controller
         return view('profiles/index', compact('user', 'follows', 'postsCount', 'followersCount', 'followingCount'));
     }
     
+    public function followers (User $user)
+    {
+        
+    }
+
     public function edit(\App\User $user)
     {
         $this->authorize('update', $user->profile);

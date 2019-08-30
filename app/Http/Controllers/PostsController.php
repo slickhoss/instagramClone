@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Post;
 use App\Comment;
 use Illuminate\Http\Request;
@@ -18,8 +19,14 @@ class PostsController extends Controller
     public function index()
     {
         $users = auth()->user()->following()->pluck('profiles.user_id');
+        $hearts = auth()->user()->likes;
+        $heart_ids = [];
+        foreach($hearts as $heart)
+        {
+            array_push($heart_ids, $heart->pivot->post_id);
+        }
         $posts = Post::whereIn('user_id', $users)->with('user')->latest()->paginate(5);
-        return view('posts.index', compact('posts'));
+        return view('posts.index', compact('posts', 'heart_ids'));
     }
 
     public function create()
