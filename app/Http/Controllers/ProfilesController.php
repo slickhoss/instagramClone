@@ -39,7 +39,12 @@ class ProfilesController extends Controller
     
     public function followers (User $user)
     {
-        
+        return view('profiles/followers', compact('user'));
+    }
+
+    public function following (User $user)
+    {
+        return view('profiles/following', compact('user'));
     }
 
     public function edit(\App\User $user)
