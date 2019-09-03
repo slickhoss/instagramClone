@@ -26,11 +26,15 @@
                 </div>     
                 
                 <div class="pt-2">
-                <a class="pr-4" href="/like/p/{post}"><img src="/svg/heart.png" class="pb-1" style="max-width: 28px"/></a><a href="/p/comment/{{$post->id}}"><img src="/svg/comment.png" class="pb-1" style="max-width: 28px"/></a>  
+                @if(in_array($post->id, $heart_ids))
+                    <img src="/svg/hearted.png" class="pb-1" style="max-width: 28px"/>
+                @else
+                    <img src="/svg/heart.png" class="pb-1" style="max-width: 28px"/>
+                @endif
+                <a href="/p/comment/{{$post->id}}" class="pl-2"><img src="/svg/comment.png" class="pb-1" style="max-width: 28px"/></a>  
                 </div>
                 <p>                
-                    <span class="font-weight-bold"><a href="/profile/{{$post->user->id}}"><span class="text-dark">{{$post->user->userName}}</a></span></span>
-                    {{$post->caption}}
+                    <span class="font-weight-bold"></span>{{$post->caption}}</span>
                 </p> 
                 <hr>
                 <p>                

@@ -40,6 +40,8 @@ Route::post('follow/{user}', 'FollowsController@store');
 
 Route::get('/', 'PostsController@index');
 
+Route::get('/explore', 'ProfilesController@explore');
+
 Route::get('/email', function(){
     return new NewUserMail();
 });

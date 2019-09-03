@@ -10,7 +10,7 @@ class ProfilesController extends Controller
 {
     public function index(User $user)
     {
-        $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
+        $follows = (auth()->user()) ? auth()->user()->following->contains('user_id', $user->id) : false;
         $postsCount = Cache::remember(
             'count.posts'. $user->id, 
             now()->addSecond(15),
@@ -51,6 +51,14 @@ class ProfilesController extends Controller
     {
         $this->authorize('update', $user->profile);
         return view('profiles.edit', compact('user'));
+    }
+
+    public function explore(User $user)
+    {
+
+        $follows = (auth()->user()) ? auth()->user()->following->contains('user_id', $user->id) : false;
+        $userCollection = User::all();
+        return view('profiles.explore', compact('follows', 'userCollection'));
     }
 
     public function update(User $user)

@@ -56,7 +56,13 @@ class PostsController extends Controller
 
     public function show(\App\Post $post)
     {
-        return view('posts/show', ['post' => $post, 'user' => $post->user()]);
+        $user = $post->user();
+        $heart_ids = [];
+        foreach(auth()->user()->likes as $like)
+        {
+            array_push($heart_ids, $like->pivot->post_id);
+        }
+        return view('posts/show', compact('post', 'user', 'heart_ids'));
     }
 
     public function likedBy (\App\Post $post)
@@ -68,6 +74,6 @@ class PostsController extends Controller
     public function delete( \App\Post $post)
     {
         $post->delete();
-        return redirect('/profile/' . auth()->user()->id);
+        return redirect('/');
     }
 }

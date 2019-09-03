@@ -9,10 +9,10 @@
                 <hr>
             </div>
     @foreach($user->following as $follow)
-    @if($follow->id == auth()->user()->id)
+    @if($follow->user_id == auth()->user()->id)
         @continue
     @endif
-        <a href="/profile/{{$follow->id}}">
+        <a href="/profile/{{$follow->user_id}}">
             <div class="border border-light rounded pl-2 pt-2 pb-2">
                 <img src="{{$follow->profileImage()}}" class="rounded-circle" style="width : 40px;">        
                 <span class="font-weight-bold"><span class="text-dark">{{$follow->user->userName}}</span></span>

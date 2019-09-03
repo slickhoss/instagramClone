@@ -6,7 +6,6 @@
 
 <script>
 export default {
-
     props: ['userId', 'follows'],
     mounted() {
         console.log('Component mounted.')
@@ -33,7 +32,6 @@ export default {
                 });
         }
     },
-
     computed: {
         buttonText(){
             return(this.status) ? 'Unfollow' : 'Follow'

@@ -13,7 +13,7 @@
 
     <div class="row pt-2 pb-4">
         <div class="col-6 offset-3">
-            <a class="pr-4" href="/like/p/{{$post->id}}">
+            <a class="pr-2" href="/like/p/{{$post->id}}">
                 @if(in_array($post->id, $heart_ids))
                     <img src="/svg/hearted.png" class="pb-1" style="max-width: 28px"/>
                 @else
@@ -22,18 +22,19 @@
             </a>
             <a href="/p/comment/{{$post->id}}"><img src="/svg/comment.png" class="pb-1" style="max-width: 28px"/></a>  
                 <span class="float-right pr-1"> 
-                <?php 
-                    if($post->likedBy->count() <= 5){        
-                        $array = [];
-                        foreach($post->likedby as $like){
-                            array_push($array, '<a href="profile/'.$like->id.'">'.$like->name.'</a>');
+                <?php
+                    if($post->likedBy->count() > 0) 
+                        if($post->likedBy->count() <= 5){        
+                            $array = [];
+                            foreach($post->likedby as $like){
+                                array_push($array, '<a href="profile/'.$like->id.'">'.$like->name.'</a>');
+                            }
+                            echo 'Liked by: ' . implode(', ', $array);
                         }
-                        echo 'Liked by: ' . implode(', ', $array);
-                    }
-                    else
-                    {
-                        echo '<a href="/likedby/'.$post->id.'">'.$post->likedBy->count() . ' likes</a>';
-                    }
+                        else
+                        {
+                            echo '<a href="/likedby/'.$post->id.'">'.$post->likedBy->count() . ' likes</a>';
+                        }
                 ?>
 
                 </span>

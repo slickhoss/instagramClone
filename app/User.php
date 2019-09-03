@@ -6,12 +6,13 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use App\Mail\NewUserMail;
 
 class User extends Authenticatable
 {
     use Notifiable;
-
+    public $incrementing = false;//set incrementing to false, using uuids
     /**
      * The attributes that are mass assignable.
      *
@@ -47,15 +48,26 @@ class User extends Authenticatable
     protected static function boot()
     {
         parent::boot();
+
+        static::creating(function ($user){
+            $user->{$user->getKeyName()} = (string) Str::uuid();
+        });
+
         static::created(
             function ($user)
             {
                 $user->profile()->create(
                     ['title' => $user->userName]);
                     $user->following()->toggle($user->profile);
+                    $user->profile->id = $user->id;
                 Mail::to($user->email)->send(new NewUserMail());
 
             });
+    }
+
+    public function getKeyType()
+    {
+        return 'string';
     }
 
     public function posts()
